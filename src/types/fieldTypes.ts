@@ -4,10 +4,16 @@ export type FieldType =
   | 'dropdown'
   | 'multiselect'
   | 'singleselect'
-  | 'number';
+  | 'number'
+  | 'email'
+  | 'date'
+  | 'url'
+  | 'file';
 
 export interface Field {
   id: string;
   type: FieldType;
   label: string;
+  isNew?: boolean;
+  options?: string[];
 }
