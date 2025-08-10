@@ -19,7 +19,7 @@ export const MASTER_FIELDS: Field[] = [
     label: 'Skills',
     options: ['JS', 'React', 'Node', 'MongoDB']
   },
-  { key: 'socialLink', id: '7', type: 'url', label: 'Any Website/Social Media Profile Link' },
+  { key: 'socialLink', id: '7', type: 'url', label: 'LinkedIn Profile Link' },
   { key: 'expectedSalary', id: '8', type: 'number', label: 'Expected Salary' },
   { key: 'qualification', id: '9', type: 'text', label: 'Highest Qualification' },
   {
