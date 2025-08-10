@@ -52,27 +52,32 @@ export default function PreviewPage() {
                   {["text", "email", "number", "date", "url"].includes(field.type) && (
                     <input
                       type={field.type}
+                      readOnly
                       style={{
                         width: "100%",
                         padding: "10px",
                         border: "1px solid #dadce0",
                         borderRadius: "4px",
                         outline: "none",
-                        fontSize: "14px"
+                        fontSize: "14px",
+                        cursor: "not-allowed",
+                        // backgroundColor: "#f5f5f5"
                       }}
-                      onFocus={(e) => e.target.style.border = "2px solid #673ab7"}
-                      onBlur={(e) => e.target.style.border = "1px solid #dadce0"}
+                      // onFocus={(e) => e.target.style.border = "2px solid #673ab7"}
+                      // onBlur={(e) => e.target.style.border = "1px solid #dadce0"}
                     />
                   )}
 
                   {field.type === "dropdown" && (
                     <select
+                      disabled
                       style={{
                         width: "100%",
                         padding: "10px",
                         border: "1px solid #dadce0",
                         borderRadius: "4px",
-                        fontSize: "14px"
+                        fontSize: "14px",
+                        cursor: "not-allowed"
                       }}
                     >
                       {field.options?.map((opt, idx) => (
@@ -84,13 +89,15 @@ export default function PreviewPage() {
                   {field.type === "multiselect" && (
                     <select
                       multiple
+                      disabled
                       style={{
                         width: "100%",
                         padding: "10px",
                         border: "1px solid #dadce0",
                         borderRadius: "4px",
                         fontSize: "14px",
-                        height: "100px"
+                        height: "100px",
+                        cursor: "not-allowed"
                       }}
                     >
                       {field.options?.map((opt, idx) => (
@@ -102,11 +109,13 @@ export default function PreviewPage() {
                   {field.type === "file" && (
                     <input
                       type="file"
+                      disabled
                       style={{
                         width: "100%",
                         padding: "6px",
                         border: "1px solid #dadce0",
-                        borderRadius: "4px"
+                        borderRadius: "4px",
+                        cursor: "not-allowed"
                       }}
                     />
                   )}
@@ -116,6 +125,7 @@ export default function PreviewPage() {
 
             <button
               type="submit"
+              disabled
               style={{
                 backgroundColor: "#673ab7",
                 color: "#fff",
@@ -123,7 +133,7 @@ export default function PreviewPage() {
                 padding: "10px 20px",
                 borderRadius: "4px",
                 fontSize: "14px",
-                cursor: "pointer"
+                cursor: "not-allowed"
               }}
             >
               Submit

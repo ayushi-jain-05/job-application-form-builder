@@ -15,7 +15,7 @@ export default function EditForm() {
   // Add field to right panel & remove from left
   const handleAddField = useCallback((field: Field) => {
     const newField = { ...field, id: uuidv4() }; // new unique id for right panel
-    setAvailableFields((prev) => prev.filter((f) => f.type !== field.type));
+    setAvailableFields((prev) => prev.filter((f) => f.id !== field.id));
     setFormFields((prev) => [...prev, newField]);
   }, []);
 
