@@ -64,10 +64,10 @@ export default function DraggableFormField({ field, index, moveFormField, onRemo
     >
       {/* <span>{field.label}</span> */}
       <div className="d-flex align-items-center gap-2">
-      <FieldIcon type={field.type} />
+        <FieldIcon type={field.type} />
 
-  <span>{field.label}</span>
-</div>
+        <span>{field.label}</span>
+      </div>
 
       <Button
         variant="danger"

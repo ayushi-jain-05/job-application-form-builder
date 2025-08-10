@@ -34,20 +34,20 @@ export default function PreviewPage() {
           boxShadow: "0 1px 6px rgba(0,0,0,0.1)"
         }}>
           <img
-          src="/kroolo_icon.jpg"
-          alt="Kroolo Icon"
-          style={{
-            width: "60px",
-            marginBottom: "12px",
-            display: "block",
-            marginLeft: "auto",
-            marginRight: "auto",
-            border: "1px solid #ccc", // Light black border
-            borderRadius: "4px", // Minor border radius
-            padding: "4px", // Optional: adds space inside border
-            backgroundColor: "#fff" // Optional: ensures it blends with white background
-          }}
-        />
+            src="/kroolo_icon.jpg"
+            alt="Kroolo Icon"
+            style={{
+              width: "60px",
+              marginBottom: "12px",
+              display: "block",
+              marginLeft: "auto",
+              marginRight: "auto",
+              border: "1px solid #ccc", // Light black border
+              borderRadius: "4px", // Minor border radius
+              padding: "4px", // Optional: adds space inside border
+              backgroundColor: "#fff" // Optional: ensures it blends with white background
+            }}
+          />
 
 
           <h2 className='text-center' style={{ marginBottom: "10px", color: "#202124" }}>Job Application Form</h2>
@@ -77,6 +77,7 @@ export default function PreviewPage() {
                   {["text", "email", "number", "date", "url"].includes(field.type) && (
                     <input
                       type={field.type}
+                      disabled
                       style={{
                         width: "100%",
                         padding: "10px",
@@ -92,6 +93,7 @@ export default function PreviewPage() {
 
                   {field.type === "dropdown" && (
                     <select
+                      disabled
                       style={{
                         width: "100%",
                         padding: "10px",
@@ -106,30 +108,30 @@ export default function PreviewPage() {
                     </select>
                   )}
 
-{field.type === "multiselect" && (
-  <Select
-    isMulti
-    isDisabled
-    name={field.label}
-    options={field.options?.map((opt) => ({ value: opt, label: opt })) || []}
-    classNamePrefix="react-select"
-    styles={{
-      control: (base) => ({
-        ...base,
-        borderColor: "#dadce0",
-        borderRadius: "4px",
-        fontSize: "14px",
-        minHeight: "38px"
-      }),
-    }}
-    placeholder="Select options"
-  />
-)}
-
+                  {field.type === "multiselect" && (
+                    <Select
+                      isMulti
+                      isDisabled
+                      name={field.label}
+                      options={field.options?.map((opt) => ({ value: opt, label: opt })) || []}
+                      classNamePrefix="react-select"
+                      styles={{
+                        control: (base) => ({
+                          ...base,
+                          borderColor: "#dadce0",
+                          borderRadius: "4px",
+                          fontSize: "14px",
+                          minHeight: "38px"
+                        }),
+                      }}
+                      placeholder="Select options"
+                    />
+                  )}
 
                   {field.type === "file" && (
                     <input
                       type="file"
+                      disabled
                       style={{
                         width: "100%",
                         padding: "6px",
@@ -144,6 +146,7 @@ export default function PreviewPage() {
 
             <button
               type="submit"
+              disabled
               style={{
                 backgroundColor: "#673ab7",
                 color: "#fff",

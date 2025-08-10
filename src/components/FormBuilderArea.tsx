@@ -3,6 +3,7 @@ import { Field } from '../types/fieldTypes.tsx';
 import { useRef } from 'react';
 import { useDrop, useDrag } from 'react-dnd';
 import DraggableFormField from './DraggableFormField.tsx';
+import { useRouter } from 'next/navigation';
 
 interface FormBuilderAreaProps {
   formFields: Field[];
@@ -17,6 +18,7 @@ export default function FormBuilderArea({
   onRemoveField,
   moveFormField
 }: FormBuilderAreaProps) {
+  const router = useRouter();
   const ref = useRef(null);
 
   const [{ isOver }, drop] = useDrop(() => ({
@@ -36,7 +38,7 @@ export default function FormBuilderArea({
 
   return (
     <>
-    <div className="mb-3">
+      <div className="mb-3">
         {formFields.map((field, index) => (
           <DraggableFormField
             key={field.id}
@@ -66,23 +68,23 @@ export default function FormBuilderArea({
         Add fields by dragging it into this area
       </div>
       <div>
-        {/* Submit button below form fields */}
-        {/* {formFields.length > 0 && ( */}
-          <button
-            style={{
-              marginTop: "auto",
-              padding: "10px",
-              backgroundColor: "#007bff",
-              color: "white",
-              border: "none",
-              cursor: "pointer",
-              width: "100%"
-            }}
-            onClick={() => alert("Form submitted!")}
-          >
-            Submit
-          </button>
-        {/* )} */}
+        <button
+          style={{
+            marginTop: "auto",
+            padding: "10px",
+            backgroundColor: "#007bff",
+            color: "white",
+            border: "none",
+            cursor: "pointer",
+            width: "100%"
+          }}
+          onClick={(e) => {
+            e.preventDefault();
+            router.push("/preview")
+          }}
+        >
+          Submit
+        </button>
       </div>
     </>
   );

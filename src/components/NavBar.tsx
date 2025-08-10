@@ -11,18 +11,17 @@ import { FaEdit, FaEye } from 'react-icons/fa';
 export default function AppNavbar() {
   const pathname = usePathname();
   const [isPublished, setIsPublished] = useState(false);
-  const handleToggle = () => { 
+  const handleToggle = () => {
     setIsPublished(!isPublished);
   };
   return (
     <Navbar bg="white" variant="white" expand="lg" className="px-4">
-      <PublishedFormsDropdown/>
+      <PublishedFormsDropdown />
       <Nav className="mx-auto gap-2">
         <Link
           href="/"
-          className={`nav-link px-3 py-2 border border-black rounded ${
-            pathname === "/" ? "bg-light text-dark" : "bg-white text-dark"
-          }`}
+          className={`nav-link px-3 py-2 border border-black rounded ${pathname === "/" ? "bg-light text-dark" : "bg-white text-dark"
+            }`}
           style={{ textDecoration: "none" }}
         >
           <FaEdit className="me-2" />
@@ -30,9 +29,8 @@ export default function AppNavbar() {
         </Link>
         <Link
           href="/preview"
-          className={`nav-link px-3 py-2 border border-black rounded ${
-            pathname === "/preview" ? "bg-light text-dark" : "bg-white text-dark"
-          }`}
+          className={`nav-link px-3 py-2 border border-black rounded ${pathname === "/preview" ? "bg-light text-dark" : "bg-white text-dark"
+            }`}
           style={{ textDecoration: "none" }}
         >
           <FaEye className="me-2" />
@@ -41,7 +39,7 @@ export default function AppNavbar() {
       </Nav>
 
       <div className='ms-3'>
-        <PublishToggle/>
+        <PublishToggle />
       </div>
     </Navbar>
   );
