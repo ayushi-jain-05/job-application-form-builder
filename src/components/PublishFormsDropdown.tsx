@@ -14,7 +14,7 @@ export default function PublishedFormsDropdown() {
 
   return (
     <Dropdown align="end" className="ms-3">
-      <Dropdown.Toggle variant="secondary" size="sm">
+      <Dropdown.Toggle variant="light" size="sm" style={{ border: "1px solid black", backgroundColor: "white", color: "black" }}>
         Published Forms
       </Dropdown.Toggle>
       <Dropdown.Menu>

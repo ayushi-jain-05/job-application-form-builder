@@ -15,21 +15,34 @@ export default function AppNavbar() {
     setIsPublished(!isPublished);
   };
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" className="px-4">
+    <Navbar bg="white" variant="white" expand="lg" className="px-4">
       <PublishedFormsDropdown/>
-      <Nav className="mx-auto">
-      <Link href="/" className={`nav-link ${pathname === "/" ? "active" : ""}`}>
+      <Nav className="mx-auto gap-2">
+        <Link
+          href="/"
+          className={`nav-link px-3 py-2 border border-black rounded ${
+            pathname === "/" ? "bg-light text-dark" : "bg-white text-dark"
+          }`}
+          style={{ textDecoration: "none" }}
+        >
           <FaEdit className="me-2" />
           Edit
         </Link>
-        <Link href="/preview" className={`nav-link ${pathname === "/preview" ? "active" : ""}`}>
+        <Link
+          href="/preview"
+          className={`nav-link px-3 py-2 border border-black rounded ${
+            pathname === "/preview" ? "bg-light text-dark" : "bg-white text-dark"
+          }`}
+          style={{ textDecoration: "none" }}
+        >
           <FaEye className="me-2" />
           Preview
         </Link>
-        </Nav>
-        <div className='ms-3'>
-          <PublishToggle/>
-        </div>
+      </Nav>
+
+      <div className='ms-3'>
+        <PublishToggle/>
+      </div>
     </Navbar>
   );
 }

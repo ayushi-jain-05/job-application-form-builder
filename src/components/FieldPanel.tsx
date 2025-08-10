@@ -3,6 +3,9 @@ import { Card } from 'react-bootstrap';
 import { Field } from '../types/fieldTypes.ts';
 import { useDrag } from 'react-dnd';
 import { useRef } from 'react';
+import FieldIcon from './FieldIcon.tsx';
+import { BiDotsVerticalRounded } from 'react-icons/bi';
+
 
 interface Props {
   fields: Field[];
@@ -45,15 +48,13 @@ function DraggableField({ field, onAddField }: { field: Field; onAddField: (f: F
       style={{ opacity: isDragging ? 0.5 : 1, cursor: 'grab' }}
     >
       {/* Attach ref to a div inside the Card */}
-      <div ref={ref} className="d-flex justify-content-between align-items-center">
+      <div ref={ref} className="d-flex align-items-center gap-2">
+        <div style={{ display: 'flex' }}>
+          <BiDotsVerticalRounded size={20} color="#555" />
+          <BiDotsVerticalRounded size={20} color="#555" style={{ marginLeft: '-8px' }} />
+        </div>
+        <FieldIcon type={field.type} />
         <span>{field.label}</span>
-        <button
-          className="btn btn-sm btn-primary"
-          onClick={() => onAddField(field)}
-          disabled={isDragging}
-        >
-          Add
-        </button>
       </div>
     </Card>
   );

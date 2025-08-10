@@ -12,40 +12,45 @@ export default function EditForm() {
   const [availableFields, setAvailableFields] = useState<Field[]>([...MASTER_FIELDS]);
   const [formFields, setFormFields] = useState<Field[]>([]);
 
-  // Add field to right panel & remove from left
+  // Add field to form
   const handleAddField = useCallback((field: Field) => {
-    const newField = { ...field, id: uuidv4() }; // new unique id for right panel
-    setAvailableFields((prev) => prev.filter((f) => f.id !== field.id));
+    const newField = {
+      ...field,
+      id: uuidv4(), // Unique instance id
+    };
+    setAvailableFields((prev) => prev.filter((f) => f.key !== field.key));
     setFormFields((prev) => [...prev, newField]);
   }, []);
 
-  // Remove field from right panel & restore to left
+  // Remove field from form
   const handleRemoveField = useCallback((id: string) => {
     setFormFields((prev) => {
       const removedField = prev.find((f) => f.id === id);
-      if (!removedField) return prev;
+      if (!removedField || !removedField.key) return prev;
 
       setAvailableFields((prevAvailable) => {
-        // find original master field by type
-        const masterField = MASTER_FIELDS.find((mf) => mf.type === removedField.type);
+        const masterField = MASTER_FIELDS.find((mf) => mf.key === removedField.key);
         if (!masterField) return prevAvailable;
 
-        // avoid duplicates in left panel
-        if (prevAvailable.some((f) => f.type === masterField.type)) return prevAvailable;
+        const alreadyExists = prevAvailable.some((f) => f.key === masterField.key);
+        if (alreadyExists) return prevAvailable;
 
-        // insert back in correct order
-        const newAvailable = [...prevAvailable, masterField];
-        newAvailable.sort(
+        const updatedAvailable = [...prevAvailable, masterField];
+
+        // Sort to preserve original order
+        updatedAvailable.sort(
           (a, b) =>
-            MASTER_FIELDS.findIndex((mf) => mf.type === a.type) -
-            MASTER_FIELDS.findIndex((mf) => mf.type === b.type)
+            MASTER_FIELDS.findIndex((mf) => mf.key === a.key) -
+            MASTER_FIELDS.findIndex((mf) => mf.key === b.key)
         );
-        return newAvailable;
+
+        return updatedAvailable;
       });
 
       return prev.filter((f) => f.id !== id);
     });
   }, []);
+
 
   const moveFormField = useCallback((dragIndex: number, hoverIndex: number) => {
     setFormFields((prev) => {
@@ -62,18 +67,61 @@ export default function EditForm() {
 }, [formFields, description]);
 
   return (
-  <Container className="mt-4">
-    <Row>
-      {/* LEFT PANEL */}
-      <Col md={4}>
-        <FieldPanel fields={availableFields} onAddField={handleAddField} />
-      </Col>
+  <Container fluid className="vh-100">
+  <Row className="h-100">
+    {/* LEFT PANEL */}
+    <Col md={3} className="pt-4">
+      <FieldPanel fields={availableFields} onAddField={handleAddField} />
+    </Col>
 
-      {/* RIGHT PANEL */}
-      <Col md={8}>
-        {/* Description */}
-        <Form.Group controlId="formDescription" className="mb-3">
-          <Form.Label>Form Description (Optional)</Form.Label>
+    {/* RIGHT PANEL */}
+    <Col
+      md={9}
+      className="d-flex justify-content-center align-items-center"
+      style={{
+        backgroundImage: `url('/gradient.jpeg')`,
+        backgroundSize: 'cover',                      
+        backgroundPosition: 'center',                 
+        backgroundRepeat: 'no-repeat',
+      }}  
+    >
+      <div
+        style={{
+          background: "#fff",
+          border: "1px solid #dee2e6",
+          borderRadius: "8px",
+          padding: "24px",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+          width: "100%",
+          maxWidth: "800px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <img
+          src="/kroolo_icon.jpg"
+          alt="Kroolo Icon"
+          style={{ 
+            width: "60px", 
+            marginBottom: "12px",
+            border: "1px solid #ccc", // Light black border
+            borderRadius: "4px", // Minor border radius
+            padding: "4px", // Optional: adds space inside border
+            backgroundColor: "#fff"
+           }}
+        />
+
+        <h3 style={{ marginBottom: "16px", color: "#333" }}>
+          Job Application Form
+        </h3>
+
+        <Form.Group
+          controlId="formDescription"
+          className="mb-3"
+          style={{ width: "100%" }}
+        >
+          <Form.Label>Add Form Description</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter form description"
@@ -82,15 +130,18 @@ export default function EditForm() {
           />
         </Form.Group>
 
-        {/* Drag & Drop area */}
-        <FormBuilderArea
-          formFields={formFields}
-          onRemoveField={handleRemoveField}
-          moveFormField={moveFormField}
-          onDropField={handleAddField}
-        />
-      </Col>
-    </Row>
-  </Container>
+        <div style={{ width: "100%", flex: 1, overflowY: "auto" }}>
+          <FormBuilderArea
+            formFields={formFields}
+            onRemoveField={handleRemoveField}
+            moveFormField={moveFormField}
+            onDropField={handleAddField}
+          />
+        </div>
+      </div>
+    </Col>
+  </Row>
+</Container>
+
 );
 }

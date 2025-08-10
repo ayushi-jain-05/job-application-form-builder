@@ -4,6 +4,7 @@ import { useDrag, useDrop } from 'react-dnd';
 import { Button } from 'react-bootstrap';
 import { Trash } from 'react-bootstrap-icons';
 import { Field } from '../types/fieldTypes.ts';
+import FieldIcon from './FieldIcon.tsx';
 
 interface Props {
   field: Field;
@@ -61,7 +62,13 @@ export default function DraggableFormField({ field, index, moveFormField, onRemo
         alignItems: 'center',
       }}
     >
-      <span>{field.label}</span>
+      {/* <span>{field.label}</span> */}
+      <div className="d-flex align-items-center gap-2">
+      <FieldIcon type={field.type} />
+
+  <span>{field.label}</span>
+</div>
+
       <Button
         variant="danger"
         size="sm"

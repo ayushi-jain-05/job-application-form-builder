@@ -56,14 +56,13 @@ export default function PublishToggle() {
   };
 
   return (
-    <div style={{ color: 'white' }}>
+    <div>
       <Form.Check
         type="switch"
         id="publish-switch"
         label="Publish"
         checked={isPublished}
         onChange={handleToggle}
-        style={{ color: 'white' }}
       />
       {isPublished && publicLink && (
         <InputGroup className="mt-2">

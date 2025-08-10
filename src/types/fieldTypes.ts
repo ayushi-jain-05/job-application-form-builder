@@ -11,6 +11,7 @@ export type FieldType =
   | 'file';
 
 export interface Field {
+  key: string;
   id: string;
   type: FieldType;
   label: string;

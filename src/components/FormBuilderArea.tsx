@@ -35,48 +35,55 @@ export default function FormBuilderArea({
   drop(ref);
 
   return (
-    <div
-      ref={ref}
-      style={{
-        flex: 1,
-        border: "2px dashed #ccc",
-        padding: "10px",
-        minHeight: "400px",
-        backgroundColor: isOver ? "#f8f9fa" : "white",
-        display: "flex",
-        flexDirection: "column"
-      }}
-    >
-      <h3>Form Builder Area</h3>
-      {formFields.length === 0 && (
-        <p style={{ color: "#888" }}>Drag fields here</p>
-      )}
-      {formFields.map((field, index) => (
-        <DraggableFormField
-          key={field.id}
-          field={field}
-          index={index}
-          moveFormField={moveFormField}
-          onRemove={onRemoveField}
-        />
-      ))}
-
-      {/* Submit button below form fields */}
-      {formFields.length > 0 && (
-        <button
-          style={{
-            marginTop: "auto",
-            padding: "10px",
-            backgroundColor: "#007bff",
-            color: "white",
-            border: "none",
-            cursor: "pointer"
-          }}
-          onClick={() => alert("Form submitted!")}
-        >
-          Submit
-        </button>
-      )}
-    </div>
+    <>
+    <div className="mb-3">
+        {formFields.map((field, index) => (
+          <DraggableFormField
+            key={field.id}
+            field={field}
+            index={index}
+            moveFormField={moveFormField}
+            onRemove={onRemoveField}
+          />
+        ))}
+      </div>
+      <div
+        className='mb-3'
+        ref={ref}
+        style={{
+          flex: 1,
+          border: "2px dashed #ccc",
+          padding: "10px",
+          maxHeight: "200px",
+          overflowY: "auto",
+          backgroundColor: isOver ? "#f8f9fa" : "white",
+          display: "flex",
+          flexDirection: "column",
+          color: "#6c757d",
+          textAlign: "center"
+        }}
+      >
+        Add fields by dragging it into this area
+      </div>
+      <div>
+        {/* Submit button below form fields */}
+        {/* {formFields.length > 0 && ( */}
+          <button
+            style={{
+              marginTop: "auto",
+              padding: "10px",
+              backgroundColor: "#007bff",
+              color: "white",
+              border: "none",
+              cursor: "pointer",
+              width: "100%"
+            }}
+            onClick={() => alert("Form submitted!")}
+          >
+            Submit
+          </button>
+        {/* )} */}
+      </div>
+    </>
   );
 }
