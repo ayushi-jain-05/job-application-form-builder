@@ -3,6 +3,10 @@ import Link from 'next/link.js';
 import { useState } from 'react';
 import { Navbar, Nav, Form } from 'react-bootstrap';
 import { usePathname } from 'next/navigation.js';
+import PublishToggle from './PublishToggle.tsx';
+import PublishedFormsDropdown from './PublishFormsDropdown.tsx';
+import { FaEdit, FaEye } from 'react-icons/fa';
+
 
 export default function AppNavbar() {
   const pathname = usePathname();
@@ -12,18 +16,20 @@ export default function AppNavbar() {
   };
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="px-4">
-      <Navbar.Brand>Job Application Form Builder</Navbar.Brand>
+      <PublishedFormsDropdown/>
       <Nav className="mx-auto">
-        <Link href="/" className={`nav-link ${pathname === "/" ? "active" : ""}`}>Edit</Link>
-        <Link href="/preview" className="nav-link">Preview</Link>
-      </Nav>
-      <Form.Switch 
-        id="published-switch"
-        label="Publish"
-        checked={isPublished}
-        onChange={handleToggle}
-        className="text-white"
-      />
+      <Link href="/" className={`nav-link ${pathname === "/" ? "active" : ""}`}>
+          <FaEdit className="me-2" />
+          Edit
+        </Link>
+        <Link href="/preview" className={`nav-link ${pathname === "/preview" ? "active" : ""}`}>
+          <FaEye className="me-2" />
+          Preview
+        </Link>
+        </Nav>
+        <div className='ms-3'>
+          <PublishToggle/>
+        </div>
     </Navbar>
   );
 }
