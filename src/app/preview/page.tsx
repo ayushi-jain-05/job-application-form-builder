@@ -21,7 +21,10 @@ export default function PreviewPage() {
     <>
       <AppNavbar />
       <div style={{
-        backgroundColor: "#f1f3f4",
+        backgroundImage: "url('/gradient.jpeg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
         minHeight: "100vh",
         padding: "30px"
       }}>
